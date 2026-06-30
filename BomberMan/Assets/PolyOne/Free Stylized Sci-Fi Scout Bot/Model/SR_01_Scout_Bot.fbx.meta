@@ -100,7 +100,72 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: SR_01_Scout_Bot(Clone)
+      parentName: 
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_SR_01_Scout_Bot
+      parentName: SR_01_Scout_Bot(Clone)
+      position: {x: -5.1453247, y: 0, z: -0.0037908268}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_SR_01_Scout_Bot_Bomd
+      parentName: SR_01_Scout_Bot(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Root
+      parentName: SR_01_Scout_Bot(Clone)
+      position: {x: -0, y: 1.0772382, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Right_Hand_01
+      parentName: Root
+      position: {x: 0.13216332, y: -0.2372597, z: -0.003852538}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Right_Hand_02
+      parentName: Right_Hand_01
+      position: {x: -0, y: -0.33181447, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Right_Hand_03
+      parentName: Right_Hand_02
+      position: {x: -0, y: -0.39562145, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Right_Ear
+      parentName: Root
+      position: {x: 0.18948576, y: 0.26201305, z: 0.068085186}
+      rotation: {x: 0.11510222, y: 0.038387716, z: -0.31404093, w: 0.9416242}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Left_Hand_01
+      parentName: Root
+      position: {x: -0.132163, y: -0.23726021, z: -0.00385254}
+      rotation: {x: 1, y: 0, z: 0, w: -6.123234e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Left_Hand_02
+      parentName: Left_Hand_01
+      position: {x: -0, y: 0.331814, z: -4.0523138e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Left_Hand_03
+      parentName: Left_Hand_02
+      position: {x: -0, y: 0.39562097, z: -4.8294702e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Left_Ear
+      parentName: Root
+      position: {x: -0.189486, y: 0.2620118, z: 0.06808519}
+      rotation: {x: 0.9416243, y: 0.31404093, z: 0.03838772, w: -0.11510222}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bomd
+      parentName: SR_01_Scout_Bot(Clone)
+      position: {x: -0, y: 0.17593776, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -115,7 +180,7 @@ ModelImporter:
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 3
+  animationType: 2
   humanoidOversampling: 1
   avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1

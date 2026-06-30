@@ -11,6 +11,14 @@ public class PlayerController : MonoBehaviour
     [Header("プレイヤー設定")]
     public int playerNumber = 1; // 1=P1, 2=P2
 
+    private Animator animator;
+
+    void Start()
+    {
+        // Animator取得
+        animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
         Move();
@@ -22,7 +30,7 @@ public class PlayerController : MonoBehaviour
         float x = 0f;
         float z = 0f;
 
-        // Player1
+        // Player1（WASD）
         if (playerNumber == 1)
         {
             if (Input.GetKey(KeyCode.A)) x = -1;
@@ -30,7 +38,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.W)) z = 1;
             if (Input.GetKey(KeyCode.S)) z = -1;
         }
-        // Player2
+        // Player2（矢印キー）
         else if (playerNumber == 2)
         {
             if (Input.GetKey(KeyCode.LeftArrow)) x = -1;
@@ -39,42 +47,51 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.DownArrow)) z = -1;
         }
 
-        Vector3 move = new Vector3(x, 0, z).normalized;
+        // 移動ベクトル
+        Vector3 move = new Vector3(x, 0f, z).normalized;
 
+        // 移動
         transform.position += move * moveSpeed * Time.deltaTime;
 
-        // 移動方向を向く
+        // 向き変更
         if (move != Vector3.zero)
         {
             transform.forward = move;
+        }
+
+        // アニメーション
+        if (animator != null)
+        {
+            animator.SetFloat("Speed", move.magnitude);
         }
     }
 
     void PlaceBomb()
     {
-        // Player1
-        if (playerNumber == 1)
+        // 爆弾Prefabが設定されていなければ何もしない
+        if (bombPrefab == null)
+            return;
+
+        // Player1（Space）
+        if (playerNumber == 1 &&
+            Input.GetKeyDown(KeyCode.Space))
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Instantiate(
-                    bombPrefab,
-                    transform.position,
-                    Quaternion.identity
-                );
-            }
+            Instantiate(
+                bombPrefab,
+                transform.position,
+                Quaternion.identity
+            );
         }
-        // Player2
-        else if (playerNumber == 2)
+
+        // Player2（Enter）
+        if (playerNumber == 2 &&
+            Input.GetKeyDown(KeyCode.Return))
         {
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                Instantiate(
-                    bombPrefab,
-                    transform.position,
-                    Quaternion.identity
-                );
-            }
+            Instantiate(
+                bombPrefab,
+                transform.position,
+                Quaternion.identity
+            );
         }
     }
 }
