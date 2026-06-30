@@ -78,7 +78,7 @@ public class ReadmeEditor : Editor
     {
         var ids = AssetDatabase.FindAssets("Readme t:Readme");
         if (ids.Length == 1)
-        {
+        {https://www.google.com/imgres?q=%E3%83%9C%E3%83%B3%E3%83%90%E3%83%BC%E3%83%9E%E3%83%B3&imgurl=https%3A%2F%2Fimg.atwiki.jp%2Fniconicomugen%2Fattach%2F4761%2F9544%2Fshirobon.jpg&imgrefurl=https%3A%2F%2Fw.atwiki.jp%2Fniconicomugen%2Fpages%2F4761.html&docid=wLUPmAX2C1nAgM&tbnid=7i1qZDHXHhuqhM&vet=12ahUKEwjP-IqqoK6VAxUyR-sIHYBZMtMQnPAOegQITBAB..i&w=200&h=317&hcb=2&ved=2ahUKEwjP-IqqoK6VAxUyR-sIHYBZMtMQnPAOegQITBAB
             var readmeObject = AssetDatabase.LoadMainAssetAtPath(AssetDatabase.GUIDToAssetPath(ids[0]));
 
             Selection.objects = new UnityEngine.Object[] { readmeObject };
