@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,15 +9,24 @@ public class PlayerController : MonoBehaviour
     [Header("爆弾")]
     public GameObject bombPrefab;
 
+    [Header("移動判定")]
+    public LayerMask obstacleLayer;
+
     [Header("プレイヤー設定")]
     public int playerNumber = 1; // 1=P1, 2=P2
 
+    public float gridSize = 1.2f;
+
     private Animator animator;
+    private bool isMoving = false;
+    private Vector3 targetPosition;
 
     void Start()
     {
         // Animator取得
         animator = GetComponent<Animator>();
+
+        targetPosition = transform.position;
     }
 
     void Update()
@@ -27,6 +37,26 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
+        // 移動中なら目的地まで進む
+        if (isMoving)
+        {
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                targetPosition,
+                moveSpeed * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, targetPosition) < 0.01f)
+            {
+                transform.position = targetPosition;
+                isMoving = false;
+            }
+
+            if (animator != null)
+                animator.SetFloat("Speed", 1);
+
+            return;
+        }
+
         float x = 0f;
         float z = 0f;
 
@@ -47,51 +77,87 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.DownArrow)) z = -1;
         }
 
-        // 移動ベクトル
-        Vector3 move = new Vector3(x, 0f, z).normalized;
+        Vector3 dir = new Vector3(x, 0, z);
 
-        // 移動
-        transform.position += move * moveSpeed * Time.deltaTime;
-
-        // 向き変更
-        if (move != Vector3.zero)
+        if (dir != Vector3.zero)
         {
-            transform.forward = move;
+            transform.forward = dir;
+
+            Vector3 nextPos = transform.position + dir * gridSize;
+
+            // 移動先にあるColliderを取得
+            Collider[] hits = Physics.OverlapBox(
+                nextPos,
+                new Vector3(0.45f, 0.5f, 0.45f),
+                Quaternion.identity,
+                obstacleLayer
+            );
+
+            bool canMove = true;
+
+            foreach (Collider hit in hits)
+            {
+                // 壁なら進めない
+                if (hit.gameObject.layer == LayerMask.NameToLayer("Wall"))
+                {
+                    canMove = false;
+                    break;
+                }
+
+                // 爆弾なら判定
+                Bomb bomb = hit.GetComponent<Bomb>();
+
+                if (bomb != null)
+                {
+                    // 通り抜け可能な爆弾なら無視
+                    if (bomb.CanPass(this))
+                        continue;
+
+                    canMove = false;
+                    break;
+                }
+            }
+
+            if (canMove)
+            {
+                transform.forward = dir;
+                targetPosition = nextPos;
+                isMoving = true;
+            }
         }
 
-        // アニメーション
-        if (animator != null)
-        {
-            animator.SetFloat("Speed", move.magnitude);
-        }
+        if (animator != null && !isMoving)
+            animator.SetFloat("Speed", 0);
     }
 
     void PlaceBomb()
     {
-        // 爆弾Prefabが設定されていなければ何もしない
         if (bombPrefab == null)
             return;
 
-        // Player1（Space）
-        if (playerNumber == 1 &&
-            Input.GetKeyDown(KeyCode.Space))
-        {
-            Instantiate(
-                bombPrefab,
-                transform.position,
-                Quaternion.identity
-            );
-        }
+        Vector3 spawnPos = new Vector3(
+            Mathf.Round(transform.position.x / gridSize) * gridSize,
+            transform.position.y,
+            Mathf.Round(transform.position.z / gridSize) * gridSize
+        );
 
-        // Player2（Enter）
-        if (playerNumber == 2 &&
-            Input.GetKeyDown(KeyCode.Return))
+        if ((playerNumber == 1 && Input.GetKeyDown(KeyCode.Space)) ||
+            (playerNumber == 2 && Input.GetKeyDown(KeyCode.Return)))
         {
-            Instantiate(
+            GameObject bomb = Instantiate(
                 bombPrefab,
-                transform.position,
+                spawnPos,
                 Quaternion.identity
             );
+
+            Bomb bombScript = bomb.GetComponent<Bomb>();
+
+            if (bombScript != null)
+            {
+                bombScript.SetPlayer(this);
+            }
         }
     }
+
+
 }
