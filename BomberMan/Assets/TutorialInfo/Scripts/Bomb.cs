@@ -79,21 +79,38 @@ public class Bomb : MonoBehaviour
     {
         for (int i = 1; i <= power; i++)
         {
-            Vector3 pos =
-                transform.position +
-                dir * gridSize * i;
+            Vector3 pos = transform.position + dir * i * gridSize;
 
-            bool hitWall = Physics.CheckBox(
+            Collider[] hits = Physics.OverlapBox(
                 pos,
-                new Vector3(0.4f, 0.4f, 0.4f),
-                Quaternion.identity,
-                wallLayer
+                new Vector3(0.45f, 0.45f, 0.45f)
             );
 
-            if (hitWall)
+            bool stop = false;
+
+            foreach (Collider hit in hits)
             {
-                break;
+                // 壊れない壁
+                if (hit.gameObject.layer == LayerMask.NameToLayer("Wall"))
+                {
+                    stop = true;
+                    break;
+                }
+
+                // 壊せる壁
+                if (hit.gameObject.layer == LayerMask.NameToLayer("BreakableWall"))
+                {
+                    Destroy(hit.gameObject);
+
+                    CreateExplosion(pos);
+
+                    stop = true;
+                    break;
+                }
             }
+
+            if (stop)
+                break;
 
             CreateExplosion(pos);
         }

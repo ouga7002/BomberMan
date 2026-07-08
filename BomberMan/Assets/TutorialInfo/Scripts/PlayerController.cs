@@ -111,6 +111,11 @@ public class PlayerController : MonoBehaviour
                     canMove = false;
                     break;
                 }
+                if (hit.gameObject.layer == LayerMask.NameToLayer("BreakableWall"))
+                {
+                    canMove = false;
+                    break;
+                }
 
                 // 爆弾なら判定
                 Bomb bomb = hit.GetComponent<Bomb>();
