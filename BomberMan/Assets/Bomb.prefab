@@ -184,7 +184,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bomb
   explodeTime: 2
+  power: 2
+  gridSize: 1.2
   explosionPrefab: {fileID: 0}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  canPass: 1
 --- !u!65 &2280550329887519764
 BoxCollider:
   m_ObjectHideFlags: 0

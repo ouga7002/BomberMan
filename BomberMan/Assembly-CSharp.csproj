@@ -49,6 +49,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.4.0f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\TutorialInfo\Scripts\Explosion.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Bomb.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\TitleManager.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />

@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     public float gridSize = 1.2f;
 
+
     private Animator animator;
     private bool isMoving = false;
     private Vector3 targetPosition;
@@ -76,6 +77,13 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.UpArrow)) z = 1;
             if (Input.GetKey(KeyCode.DownArrow)) z = -1;
         }
+
+        // 斜め移動を禁止（横優先）
+        if (x != 0)
+        {
+            z = 0;
+        }
+
 
         Vector3 dir = new Vector3(x, 0, z);
 
@@ -159,5 +167,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+   
 
 }
