@@ -10,7 +10,7 @@ Material:
   m_Name: WoodenFlooring_URPShader
   m_Shader: {fileID: 4800000, guid: 6d118ceaa1d482544b8ec92406f6bcde, type: 3}
   m_Parent: {fileID: 2100000, guid: 65680adb3acaf25498be652482606b91, type: 2}
-  m_ModifiedSerializedProperties: 2
+  m_ModifiedSerializedProperties: 30
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _EMISSION
@@ -54,6 +54,9 @@ Material:
     - _MetallicStrength: 0
     - _NormalScale: 1.5
     - _SmoothnessStrength: 2
+    - _TessMin: 10
+    - _TessValue: 1
+    - _Tile: 1
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
