@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: PlainWhiteFabric_URPShader
   m_Shader: {fileID: 4800000, guid: 6d118ceaa1d482544b8ec92406f6bcde, type: 3}
-  m_Parent: {fileID: 2100000, guid: cfd22c3f14ed7cd43ae1d0bdde543ae4, type: 2}
+  m_Parent: {fileID: 2100000, guid: 39961ee0aa5ac2d41ac462b57c29b50f, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
