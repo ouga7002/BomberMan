@@ -19,6 +19,7 @@ public class Bomb : MonoBehaviour
     private Collider bombCollider;
     private Collider playerCollider;
     private bool collisionEnabled = false;
+    private bool exploded = false;
 
     void Start()
     {
@@ -63,14 +64,28 @@ public class Bomb : MonoBehaviour
         }
     }
 
-    void Explode()
+    public void Explode()
     {
+        // 二重爆発防止
+        if (exploded)
+            return;
+
+        exploded = true;
+
+        // 予約していた爆発をキャンセル
+        CancelInvoke(nameof(Explode));
+
         CreateExplosion(transform.position);
 
         ExplodeDirection(Vector3.forward);
         ExplodeDirection(Vector3.back);
         ExplodeDirection(Vector3.left);
         ExplodeDirection(Vector3.right);
+
+        if (owner != null)
+        {
+            owner.ReturnBomb();
+        }
 
         Destroy(gameObject);
     }
@@ -106,6 +121,13 @@ public class Bomb : MonoBehaviour
 
                     stop = true;
                     break;
+                }
+                // 他の爆弾なら誘爆
+                Bomb bomb = hit.GetComponent<Bomb>();
+
+                if (bomb != null && bomb != this)
+                {
+                    bomb.Explode();
                 }
             }
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -65,9 +66,16 @@ public class PlayerHealth : MonoBehaviour
     }
     void Die()
     {
-        Debug.Log(gameObject.name + " が倒れた");
+        if (gameObject.name.Contains("Player1"))
+        {
+            PlayerPrefs.SetString("Winner", "Player2");
+        }
+        else
+        {
+            PlayerPrefs.SetString("Winner", "Player1");
+        }
 
-        Destroy(gameObject);
+        SceneManager.LoadScene("ResultScene");
     }
 
     public int GetHP()

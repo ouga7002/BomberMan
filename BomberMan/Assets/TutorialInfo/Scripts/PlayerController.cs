@@ -9,12 +9,20 @@ public class PlayerController : MonoBehaviour
     [Header("爆弾")]
     public GameObject bombPrefab;
 
+    // 最大設置数
+    public int maxBombCount = 3;
+
+    // 現在設置中の爆弾
+    private int currentBombCount = 0;
+
+
     [Header("移動判定")]
     public LayerMask obstacleLayer;
 
     [Header("プレイヤー設定")]
     public int playerNumber = 1; // 1=P1, 2=P2
 
+    // 一マスのサイズ（グリッドサイズ）
     public float gridSize = 1.2f;
 
 
@@ -148,30 +156,45 @@ public class PlayerController : MonoBehaviour
         if (bombPrefab == null)
             return;
 
+        // 置ける個数を超えていたら置けない
+        if (currentBombCount >= maxBombCount)
+            return;
+
         Vector3 spawnPos = new Vector3(
             Mathf.Round(transform.position.x / gridSize) * gridSize,
             transform.position.y,
             Mathf.Round(transform.position.z / gridSize) * gridSize
         );
 
-        if ((playerNumber == 1 && Input.GetKeyDown(KeyCode.Space)) ||
-            (playerNumber == 2 && Input.GetKeyDown(KeyCode.Return)))
+        bool push =
+            (playerNumber == 1 && Input.GetKeyDown(KeyCode.Space)) ||
+            (playerNumber == 2 && Input.GetKeyDown(KeyCode.Return));
+
+        if (!push)
+            return;
+
+        GameObject bomb = Instantiate(
+            bombPrefab,
+            spawnPos,
+            Quaternion.identity
+        );
+
+        Bomb bombScript = bomb.GetComponent<Bomb>();
+
+        if (bombScript != null)
         {
-            GameObject bomb = Instantiate(
-                bombPrefab,
-                spawnPos,
-                Quaternion.identity
-            );
-
-            Bomb bombScript = bomb.GetComponent<Bomb>();
-
-            if (bombScript != null)
-            {
-                bombScript.SetPlayer(this);
-            }
+            bombScript.SetPlayer(this);
         }
+
+        currentBombCount++;
     }
 
-   
+    public void ReturnBomb()
+    {
+        currentBombCount--;
+
+        if (currentBombCount < 0)
+            currentBombCount = 0;
+    }
 
 }
