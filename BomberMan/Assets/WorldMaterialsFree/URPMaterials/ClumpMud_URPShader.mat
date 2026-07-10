@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: ClumpMud_URPShader
   m_Shader: {fileID: 4800000, guid: 6d118ceaa1d482544b8ec92406f6bcde, type: 3}
-  m_Parent: {fileID: 2100000, guid: fb6b7ccecbc0051419eb61f0e99f6443, type: 2}
+  m_Parent: {fileID: 2100000, guid: c18631ac74d3d2b4488c87e429c5781f, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords:
