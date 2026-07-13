@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Assets\TutorialInfo\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Explosion.cs" />
+    <Compile Include="Assets\TutorialInfo\Scripts\BreakableWall.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\TitleUIManager.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Bomb.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\TitleManager.cs" />
