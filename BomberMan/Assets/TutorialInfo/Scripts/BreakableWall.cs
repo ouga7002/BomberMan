@@ -16,9 +16,9 @@ public class BreakableWall : MonoBehaviour
             int index = Random.Range(0, itemPrefabs.Length);
 
             Instantiate(
-                itemPrefabs[index],
-                transform.position,
-                Quaternion.identity
+                 itemPrefabs[index],
+                 transform.position,
+                 itemPrefabs[index].transform.rotation
             );
         }
 
