@@ -115,7 +115,15 @@ public class Bomb : MonoBehaviour
                 // 壊せる壁
                 if (hit.gameObject.layer == LayerMask.NameToLayer("BreakableWall"))
                 {
-                    Destroy(hit.gameObject);
+                    BreakableWall wall = hit.GetComponent<BreakableWall>();
+                    if (wall != null)
+                    {
+                        wall.Break();
+                    }
+                    else
+                    {
+                        Destroy(hit.gameObject);
+                    }
 
                     CreateExplosion(pos);
 

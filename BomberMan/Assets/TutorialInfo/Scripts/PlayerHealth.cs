@@ -82,4 +82,13 @@ public class PlayerHealth : MonoBehaviour
     {
         return currentHP;
     }
+    public void Heal(int value)
+    {
+        currentHP += value;
+
+        if (currentHP > maxHP)
+            currentHP = maxHP;
+
+        UpdateHPUI();
+    }
 }

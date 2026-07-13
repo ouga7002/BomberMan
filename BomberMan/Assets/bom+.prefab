@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1494519106814709967}
   - component: {fileID: 252387046683359794}
   - component: {fileID: 9184229258154747664}
+  - component: {fileID: 3909341618780142935}
   m_Layer: 0
   m_Name: bom+
   m_TagString: Untagged
@@ -136,8 +137,25 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3909341618780142935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477740750025267417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d40ee16018cf14394cdd3ab4dd3900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  itemType: 1
+  addPower: 1
+  addBomb: 1
+  addSpeed: 1
+  addHP: 1
