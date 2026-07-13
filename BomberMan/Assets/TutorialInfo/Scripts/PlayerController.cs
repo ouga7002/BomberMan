@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
 
     // 現在設置中の爆弾
     private int currentBombCount = 0;
+    //爆風
+    public int power = 2;
 
 
     [Header("移動判定")]
@@ -183,6 +185,8 @@ public class PlayerController : MonoBehaviour
 
         if (bombScript != null)
         {
+            // プレイヤーの火力を爆弾へ渡す
+            bombScript.power = power;
             bombScript.SetPlayer(this);
         }
 

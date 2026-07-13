@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8939940869799761191}
   - component: {fileID: 1289601776117126686}
   - component: {fileID: 7183012697990270658}
+  - component: {fileID: 2140214034570820131}
   m_Layer: 7
   m_Name: BreakableWall
   m_TagString: Untagged
@@ -140,3 +141,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2140214034570820131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8471962109372331812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82389911818dd7242ba55938a99149b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BreakableWall
+  itemPrefabs:
+  - {fileID: 1477740750025267417, guid: 0835d1c1f9b04a34ab9bbd6f9c2eb7fe, type: 3}
+  dropRate: 30
