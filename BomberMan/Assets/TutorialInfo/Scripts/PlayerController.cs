@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private int currentBombCount = 0;
     //爆風
     public int power = 2;
-
+    public int maxPower = 5;
 
     [Header("移動判定")]
     public LayerMask obstacleLayer;

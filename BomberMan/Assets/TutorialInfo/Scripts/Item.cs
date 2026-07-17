@@ -27,7 +27,13 @@ public class Item : MonoBehaviour
         switch (itemType)
         {
             case ItemType.FireUp:
-                player.power ++;
+                player.power += addPower;
+
+                if (player.power > player.maxPower)
+                {
+                    player.power = player.maxPower;
+                }
+
                 break;
 
             case ItemType.BombUp:
