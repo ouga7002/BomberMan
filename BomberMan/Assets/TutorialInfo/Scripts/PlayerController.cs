@@ -1,10 +1,13 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("移動")]
     public float moveSpeed = 5f;
+
+    private Gamepad pad;
 
     [Header("爆弾")]
     public GameObject bombPrefab;
@@ -24,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [Header("プレイヤー設定")]
     public int playerNumber = 1; // 1=P1, 2=P2
 
+
     // 一マスのサイズ（グリッドサイズ）
     public float gridSize = 1.2f;
 
@@ -38,6 +42,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
 
         targetPosition = transform.position;
+
     }
 
     void Update()
@@ -45,9 +50,17 @@ public class PlayerController : MonoBehaviour
         Move();
         PlaceBomb();
     }
-
+ 
     void Move()
     {
+        Debug.Log("Gamepad Count = " + Gamepad.all.Count);
+
+        if (playerNumber == 1)
+            pad = Gamepad.all.Count > 0 ? Gamepad.all[0] : null;
+
+        if (playerNumber == 2)
+            pad = Gamepad.all.Count > 1 ? Gamepad.all[1] : null;
+
         // 移動中なら目的地まで進む
         if (isMoving)
         {
@@ -71,6 +84,12 @@ public class PlayerController : MonoBehaviour
         float x = 0f;
         float z = 0f;
 
+        if (pad != null)
+        {
+            x = Mathf.Round(pad.leftStick.x.ReadValue());
+            z = Mathf.Round(pad.leftStick.y.ReadValue());
+        }
+
         // Player1（WASD）
         if (playerNumber == 1)
         {
@@ -78,6 +97,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.D)) x = 1;
             if (Input.GetKey(KeyCode.W)) z = 1;
             if (Input.GetKey(KeyCode.S)) z = -1;
+
         }
         // Player2（矢印キー）
         else if (playerNumber == 2)
@@ -168,9 +188,12 @@ public class PlayerController : MonoBehaviour
             Mathf.Round(transform.position.z / gridSize) * gridSize
         );
 
-        bool push =
-            (playerNumber == 1 && Input.GetKeyDown(KeyCode.Space)) ||
-            (playerNumber == 2 && Input.GetKeyDown(KeyCode.Return));
+        bool push = false;
+
+        if (pad != null)
+        {
+            push = pad.buttonSouth.wasPressedThisFrame;
+        }
 
         if (!push)
             return;
