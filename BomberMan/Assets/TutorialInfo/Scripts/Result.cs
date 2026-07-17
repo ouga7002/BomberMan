@@ -1,14 +1,28 @@
 using TMPro;
 using UnityEngine;
 
-public class ResultManager : MonoBehaviour
+public class Result: MonoBehaviour
 {
-    public TextMeshProUGUI resultText;
+    [SerializeField] private TextMeshProUGUI winnerText;
 
-    void Start()
+    [SerializeField] private TextMeshProUGUI leftResultText;
+    [SerializeField] private TextMeshProUGUI rightResultText;
+
+    private void Start()
     {
         string winner = PlayerPrefs.GetString("Winner", "");
 
-        resultText.text = winner + " WIN!";
+        winnerText.text = winner + " WIN!";
+
+        if (winner == "Player1")
+        {
+            leftResultText.text = "WIN";
+            rightResultText.text = "LOSE";
+        }
+        else if (winner == "Player2")
+        {
+            leftResultText.text = "LOSE";
+            rightResultText.text = "WIN";
+        }
     }
 }

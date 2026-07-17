@@ -54,6 +54,7 @@
     <Compile Include="Assets\TutorialInfo\Scripts\PlayerControls.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\BreakableWall.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\TitleUIManager.cs" />
+    <Compile Include="Assets\TutorialInfo\Scripts\TitleButton.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Item.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Bomb.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\TitleManager.cs" />
