@@ -66,15 +66,16 @@ public class PlayerHealth : MonoBehaviour
     }
     void Die()
     {
-        if (gameObject.name.Contains("Player1"))
+        if (gameObject.name.Contains("1P"))
         {
-            PlayerPrefs.SetString("Winner", "Player2");
+            PlayerPrefs.SetString("Winner", "2P");
         }
-        else
+        else if (gameObject.name.Contains("2P"))
         {
-            PlayerPrefs.SetString("Winner", "Player1");
+            PlayerPrefs.SetString("Winner", "1P");
         }
 
+        PlayerPrefs.Save();
         SceneManager.LoadScene("ResultScene");
     }
 

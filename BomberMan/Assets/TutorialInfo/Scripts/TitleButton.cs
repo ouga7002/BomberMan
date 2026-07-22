@@ -1,11 +1,14 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class TitleButton : MonoBehaviour
+public class TitleButton: MonoBehaviour
 {
-    // ボタンのOnClickに登録する
-    public void BackToTitle()
+    void Update()
     {
-        SceneManager.LoadScene("TitleScene");
+        if (Gamepad.current != null && Gamepad.current.aButton.wasPressedThisFrame)
+        {
+            SceneManager.LoadScene("TitleScene");
+        }
     }
 }
